@@ -20,11 +20,13 @@
 </head>
 <body>
 	<h1>Książki</h1>
+	<!-- 
 	<div>
 		<c:if test="${not empty books}">
 			<table class="table table-hover">
 				<thead>
 					<tr>
+						<th>LP</th>
 						<th>ID</th>
 						<th>Tytuł</th>
 						<th>Autor</th>
@@ -35,8 +37,9 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${books}" var="book">
+					<c:forEach items="${books}" var="book" varStatus="lp">
 						<tr>
+							<td>${lp.count}</td>
 							<td>${book.id}</td>
 							<td>${book.title}</td>
 							<td>${book.author}</td>
@@ -50,18 +53,56 @@
 			</table>
 		</c:if>
 	</div>
+-->
+
+	<div>
+		<c:if test="${not empty categories}">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>LP</th>
+						<th>Kategoria</th>
+						<th>Liczba</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${categories}" var="category" varStatus="lp">
+						<tr>
+							<td>${lp.count}</td>
+							<td>${category.key}</td>
+							<td>${category.value}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</c:if>
+	</div>
 
 	<p></p>
-	<h2>Kategorie</h2>
-
-	<div id="myChart" style="height:400px; width:500px;"></div>
+	<table style="border: 0; padding: 0;">
+		<tr>
+			<td><h2>Kategorie</h2></td>
+			<td><h2>Podkategorie</h2></td>
+			<td><h2>Rok wydania</h2></td>
+		</tr>
+		<tr>
+			<td><div id="myChart" style="height:500px; width:500px;"></div></td>
+			<td><div id="myChart2" style="height:500px; width:500px;"></div></td>
+			<td><div id="myChart3" style="height:500px; width:500px;"></div></td>
+		</tr>
+		<tr>
+			<td><h2>Ocena</h2></td>
+		</tr>
+		<tr>
+			<td><div id="myChart4" style="height:500px; width:500px;"></div></td>
+		</tr>
+	</table>
 
 </body>
 </html>
 <script>
 $(document).ready(function(){
-	var data = [ ${categoriesAsJS} ];
-	var options = {
+	var optionsLabels = {
 			seriesDefaults: {
 			renderer: jQuery.jqplot.PieRenderer,
 			rendererOptions: {
@@ -74,7 +115,25 @@ $(document).ready(function(){
                 fontSize: 11,
                 marginTop: 10,                                
             }
-			};
-			$.jqplot ('myChart', [data], options);
-	});
+	},
+	optionsNoLabels = {
+			seriesDefaults: {
+			renderer: jQuery.jqplot.PieRenderer,
+			rendererOptions: {
+			showDataLabels: true
+			}
+			},
+            legend: {
+                show: false,
+                location: 'e',
+                fontSize: 11,
+                marginTop: 10,                                
+            }
+	};
+
+	$.jqplot ('myChart', [ [${categoriesAsJS}] ], optionsLabels);
+	$.jqplot ('myChart2', [ [${subcategoriesAsJS}] ], optionsNoLabels);
+	$.jqplot ('myChart3', [ [${yearsAsJS}] ], optionsLabels);
+	$.jqplot ('myChart4', [ [${ratesAsJS}] ], optionsLabels);
+});
 </script>

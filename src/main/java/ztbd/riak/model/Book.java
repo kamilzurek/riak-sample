@@ -25,6 +25,9 @@ public class Book {
 	@Transient
 	private String bucketName = BUCKET;
 
+	@Transient
+	private String desc_s;
+
 	@Id
 	@Column(name = "id")
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "books_sequence")
@@ -34,15 +37,34 @@ public class Book {
 	@Column(name = "isbn")
 	private String isbn;
 
+	@Column(name = "price")
 	private BigDecimal price;
+
+	@Column(name = "pages")
 	private Integer pages;
+
+	@Column(name = "review")
 	private Integer review;
+
+	@Column(name = "desc")
 	private String desc;
-	private Integer issue_date;
+
+	@Column(name = "issue_date")
+	private String issue_date;
+
+	@Column(name = "category")
 	private String category;
+
+	@Column(name = "subcategory")
 	private String subcategory;
+
+	@Column(name = "rating")
 	private BigDecimal rating;
+
+	@Column(name = "author")
 	private String author;
+
+	@Column(name = "title")
 	private String title;
 
 	public Book() {
@@ -104,11 +126,11 @@ public class Book {
 		this.desc = desc;
 	}
 
-	public Integer getIssue_date() {
+	public String getIssue_date() {
 		return issue_date;
 	}
 
-	public void setIssue_date(Integer issue_date) {
+	public void setIssue_date(String issue_date) {
 		this.issue_date = issue_date;
 	}
 
@@ -152,9 +174,19 @@ public class Book {
 		this.title = title;
 	}
 
-	@Override
-	public String toString() {
-		return "Book [bucketName=" + bucketName + ", id=" + id + ", isbn=" + isbn + "]";
+	public String getDesc_s() {
+		return desc_s;
 	}
+
+	public void setDesc_s(String desc_s) {
+		this.desc_s = desc_s;
+	}
+
+//	@Override
+//	public String toString() {
+//		return "Book [id=" + id + ", isbn=" + isbn + ", price=" + price + ", pages=" + pages + ", review=" + review
+//				+ ", desc=" + desc + ", issue_date=" + issue_date + ", category=" + category + ", subcategory="
+//				+ subcategory + ", rating=" + rating + ", author=" + author + ", title=" + title + "]";
+//	}
 
 }

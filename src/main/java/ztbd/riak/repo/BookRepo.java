@@ -14,4 +14,13 @@ public interface BookRepo {
 	List<Book> getAllBooks();
 
 	Map<String, Integer> groupByCategory();
+
+	Map<String, Integer> groupBySubCategory();
+
+	Map<String, Integer> groupByYear();
+
+	Map<String, Integer> groupByRate();
+
+	List<Book> searchByDescription(String desc);
+
 }

@@ -41,4 +41,23 @@ public class BookServiceImpl implements BookService {
 		return bookRepo.groupByCategory();
 	}
 
+	@Override
+	public Map<String, Integer> groupBySubCategory() {
+		return bookRepo.groupBySubCategory();
+	}
+
+	@Override
+	public Map<String, Integer> groupByYear() {
+		return bookRepo.groupByYear();
+	}
+
+	@Override
+	public Map<String, Integer> groupByRate() {
+		return bookRepo.groupByRate();
+	}
+
+	@Override
+	public List<Book> searchByDescription(String desc) {
+		return bookRepo.searchByDescription(desc);
+	}
 }

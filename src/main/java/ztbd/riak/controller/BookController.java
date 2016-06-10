@@ -28,17 +28,35 @@ public class BookController {
 		List<Book> books = bookService.getAllBooks();
 		model.addAttribute("books", books);
 
-		Map<String, Integer> category = bookService.groupByCategory();
-		StringBuilder c = new StringBuilder();
-		for (String k : category.keySet()) {
-			c.append("['").append(k).append("', ").append(category.get(k)).append("],");
-		}
-		c.deleteCharAt(c.length()-1);
-		model.addAttribute("categoriesAsJS", c);
+		Map<String, Integer> group = bookService.groupByCategory();
+		model.addAttribute("categoriesAsJS", getAsJson(group));
+		model.addAttribute("categories", group);
 
-		LOG.info("Number of books: {}", books.size());
+		group = bookService.groupBySubCategory();
+		model.addAttribute("subcategoriesAsJS", getAsJson(group));
+
+		group = bookService.groupByYear();
+		model.addAttribute("yearsAsJS", getAsJson(group));
+
+		group = bookService.groupByRate();
+		model.addAttribute("ratesAsJS", getAsJson(group));
+
+		LOG.info("Search: {}", bookService.searchByDescription("Microsoft"));
+
+//		LOG.info("Number of books: {}", books.size());
 
 		return "books/list";
+	}
+
+	private String getAsJson(Map<String, Integer> group) {
+		StringBuilder c = new StringBuilder();
+		for (String k : group.keySet()) {
+			c.append("['").append(k).append("', ").append(group.get(k)).append("],");
+		}
+		if (c.length() > 0) {
+			c.deleteCharAt(c.length() - 1);
+		}
+		return c.toString();
 	}
 
 }
