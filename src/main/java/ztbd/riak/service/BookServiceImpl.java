@@ -17,8 +17,8 @@ import ztbd.riak.repo.BookRepo;
 public class BookServiceImpl implements BookService {
 
 	@Autowired
-	@Qualifier("riakBookRepo")
-//	@Qualifier("hibernateBookRepo")
+//	@Qualifier("riakBookRepo")
+	@Qualifier("hibernateBookRepo")
 	private BookRepo bookRepo;
 
 	@Override

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
+import org.hibernate.Query;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.transform.AliasToBeanResultTransformer;
@@ -108,7 +109,9 @@ public class HibernateBookRepo extends AbstractHibernateRepo<Book> implements Bo
 
 	@Override
 	public List<Book> searchByDescription(String desc) {
-		return null;
+		Query q = getSession().createQuery("select b from Book b where b.desc like :keyword");
+		q.setParameter("keyword", "%" + desc + "%");
+		return q.list();
 	}
 
 	public static class GroupDto<T> {

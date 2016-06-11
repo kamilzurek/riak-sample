@@ -172,7 +172,7 @@ public class RiakBookRepo implements BookRepo {
 
 	@Override
 	public List<Book> searchByDescription(String desc) {
-		SearchOperation searchOp = new SearchOperation.Builder(BinaryValue.create("book_idx"), "desc_s:*" + desc + "*").build();
+		SearchOperation searchOp = new SearchOperation.Builder(BinaryValue.create("book_idx"), "desc_s:*" + desc + "*").withNumRows(10000).build();
 		riakTemplate.getDataSource().getRiakCluster().execute(searchOp);
 		try {
 			Namespace namespace = new Namespace(Book.BUCKET);

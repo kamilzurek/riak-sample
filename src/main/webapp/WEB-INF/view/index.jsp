@@ -9,33 +9,9 @@
 	<script src="static/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<a href="books">Raporty książek</a>
-	<div ng-app="riak" ng-controller="RiakController">
-		<input ng-model="model.searchPharse" />
-		<button ng-click="search()">Szukaj</button>
-		<p></p>
-		<div>
-			<table class="table table-hover">
-				<thead>
-					<tr>
-						<th>ID</th>
-						<th>Tytuł</th>
-						<th>ISBN</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr ng-repeat="book in books">
-						<td>{{book.id}}</td>
-						<td>{{book.title}}</td>
-						<td>{{book.isbn}}</td>
-					</tr>
-				</tbody>
-			</table>
-		</div>
+	<div>
+		<a href="books/raport">Raporty książek</a><br/>
+		<a href="books/search">Szukaj</a>
 	</div>
 </body>
-
-<script src="static/js/angular.js"></script>
-<script src="static/js/app.js"></script>
-
 </html>

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import ztbd.riak.domain.DetailsBookDto;
 import ztbd.riak.domain.ReportDto;
 import ztbd.riak.domain.SearchBookDto;
 import ztbd.riak.model.Book;
@@ -50,6 +51,21 @@ public class RaportRestController {
 			result.add( new SearchBookDto(book.getTitle(), book.getId(), book.getIsbn()) );
 		}
 
+		log.info("Book searched size: {}", books.size());
+
 		return new ResponseEntity<>(result, HttpStatus.OK);
+	}
+
+	@RequestMapping(value = "/details", method = RequestMethod.GET)
+	@ResponseBody
+	public ResponseEntity<DetailsBookDto> details(@RequestParam("id") Long id, @RequestParam("isbn") String isbn) {
+		Book book = bookService.getBookById(id);
+		DetailsBookDto dto;
+		if (book != null) {
+			dto = new DetailsBookDto(book.getTitle(), book.getAuthor(), book.getDesc() != null ? book.getDesc() : book.getDesc_s());
+		} else {
+			dto = new DetailsBookDto();
+		}
+		return new ResponseEntity<>(dto, HttpStatus.OK);
 	}
 }

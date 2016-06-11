@@ -23,7 +23,7 @@ public class BookController {
 	@Autowired
 	private BookService bookService;
 
-	@RequestMapping(method = RequestMethod.GET)
+	@RequestMapping(value = "/raport", method = RequestMethod.GET)
 	public String list(Model model) {
 		List<Book> books = bookService.getAllBooks();
 		model.addAttribute("books", books);
@@ -46,6 +46,11 @@ public class BookController {
 //		LOG.info("Number of books: {}", books.size());
 
 		return "books/list";
+	}
+
+	@RequestMapping(value = "/search", method = RequestMethod.GET)
+	public String search(Model model) {
+		return "books/search";
 	}
 
 	private String getAsJson(Map<String, Integer> group) {
