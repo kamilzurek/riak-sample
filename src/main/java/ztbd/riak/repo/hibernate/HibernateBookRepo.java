@@ -27,7 +27,10 @@ public class HibernateBookRepo extends AbstractHibernateRepo<Book> implements Bo
 	@Override
 	public Book getBookById(Object id) {
 		Long pk = (Long) id;
-		return getById(pk);
+		long st = System.nanoTime();
+		Book book = getById(pk);
+		System.out.println(System.nanoTime() - st);
+		return book;
 	}
 
 	@Override
@@ -109,9 +112,12 @@ public class HibernateBookRepo extends AbstractHibernateRepo<Book> implements Bo
 
 	@Override
 	public List<Book> searchByDescription(String desc) {
+		long t = System.currentTimeMillis();
 		Query q = getSession().createQuery("select b from Book b where b.desc like :keyword");
 		q.setParameter("keyword", "%" + desc + "%");
-		return q.list();
+		List<Book> list = q.list();
+		System.out.println("time: " + (System.currentTimeMillis() - t));
+		return list;
 	}
 
 	public static class GroupDto<T> {

@@ -58,8 +58,10 @@ public class RaportRestController {
 
 	@RequestMapping(value = "/details", method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<DetailsBookDto> details(@RequestParam("id") Long id, @RequestParam("isbn") String isbn) {
+	public ResponseEntity<DetailsBookDto> details(@RequestParam("id") Long id) {
+		long st = System.currentTimeMillis();
 		Book book = bookService.getBookById(id);
+		System.out.println(System.currentTimeMillis() - st);
 		DetailsBookDto dto;
 		if (book != null) {
 			dto = new DetailsBookDto(book.getTitle(), book.getAuthor(), book.getDesc() != null ? book.getDesc() : book.getDesc_s());
