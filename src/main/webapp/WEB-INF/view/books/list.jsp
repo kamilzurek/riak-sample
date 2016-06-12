@@ -14,7 +14,7 @@
 <body>
 	<h2 style="display: inline-block;">Kategorie</h2>
 	<button type="button" class="btn btn-default btn-sm" style="display: inline-block;" data-toggle="collapse" data-target="#cats">+/-</button>
-	<div id="myChart" style="height:500px; width:500px;"></div>
+	<div id="myChart" style="height:300px; width:600px;"></div>
 	<div id="cats" data-toggle="collapse" class="collapse">
 		<c:if test="${not empty categories}">
 			<table class="table table-hover">
@@ -40,7 +40,7 @@
 	
 	<h2 style="display: inline-block;">Podkategorie</h2>
 	<button type="button" class="btn btn-default btn-sm" style="display: inline-block;" data-toggle="collapse" data-target="#subcats">+/-</button>
-	<div id="myChart2" style="height:500px; width:500px;"></div>
+	<div id="myChart2" style="height:300px; width:600px;"></div>
 	<div id="subcats" data-toggle="collapse" class="collapse">
 		<c:if test="${not empty subcategories}">
 			<table class="table table-hover">
@@ -66,7 +66,7 @@
 	
 	<h2 style="display: inline-block;">Rok wydania</h2>
 	<button type="button" class="btn btn-default btn-sm" style="display: inline-block;" data-toggle="collapse" data-target="#date">+/-</button>
-	<div id="myChart3" style="height:500px; width:500px;"></div>
+	<div id="myChart3" style="height:300px; width:600px;"></div>
 	<div id="date" data-toggle="collapse" class="collapse">
 		<c:if test="${not empty dates}">
 			<table class="table table-hover">
@@ -92,7 +92,7 @@
 
 	<h2 style="display: inline-block;">Ocena</h2>
 	<button type="button" class="btn btn-default btn-sm" style="display: inline-block;" data-toggle="collapse" data-target="#rates">+/-</button>
-	<div id="myChart4" style="height:500px; width:500px;"></div>
+	<div id="myChart4" style="height:300px; width:600px;"></div>
 	<div id="rates" data-toggle="collapse" class="collapse">
 		<c:if test="${not empty rates}">
 			<table class="table table-hover">
@@ -124,15 +124,15 @@
 <!-- 			<td><h2>Rok wydania</h2></td> -->
 <!-- 		</tr> -->
 <!-- 		<tr> -->
-<!-- 			<td><div id="myChart" style="height:500px; width:500px;"></div></td> -->
-<!-- 			<td><div id="myChart2" style="height:500px; width:500px;"></div></td> -->
-<!-- 			<td><div id="myChart3" style="height:500px; width:500px;"></div></td> -->
+<!-- 			<td><div id="myChart" style="height:300px; width:600px;"></div></td> -->
+<!-- 			<td><div id="myChart2" style="height:300px; width:600px;"></div></td> -->
+<!-- 			<td><div id="myChart3" style="height:300px; width:600px;"></div></td> -->
 <!-- 		</tr> -->
 <!-- 		<tr> -->
 <!-- 			<td><h2>Ocena</h2></td> -->
 <!-- 		</tr> -->
 <!-- 		<tr> -->
-<!-- 			<td><div id="myChart4" style="height:500px; width:500px;"></div></td> -->
+<!-- 			<td><div id="myChart4" style="height:300px; width:600px;"></div></td> -->
 <!-- 		</tr> -->
 <!-- 	</table> -->
 
@@ -151,7 +151,8 @@ $(document).ready(function(){
                 show: true,
                 location: 'e',
                 fontSize: 11,
-                marginTop: 10,                                
+                marginTop: 10,
+                rendererOptions: {numberColumns: 2}
             }
 	},
 	optionsNoLabels = {
@@ -165,7 +166,8 @@ $(document).ready(function(){
                 show: false,
                 location: 'e',
                 fontSize: 11,
-                marginTop: 10,                                
+                marginTop: 10,
+                rendererOptions: {numberColumns: 4}
             }
 	};
 
