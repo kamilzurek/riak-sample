@@ -33,10 +33,13 @@ public class RaportRestController {
 	public ResponseEntity<ReportDto> getRaport() {
 		ReportDto report = new ReportDto();
 
+		long st = System.currentTimeMillis();
 		report.setGroupByCategory( bookService.groupByCategory() );
 		report.setGroupBySubCategory( bookService.groupBySubCategory() );
 		report.setGroupByYears( bookService.groupByYear() );
 		report.setGroupByRatings( bookService.groupByRate() );
+		long end = System.currentTimeMillis();
+		System.out.println("t: " + (end - st));
 
 		return new ResponseEntity<>(report, HttpStatus.OK);
 	}
@@ -44,14 +47,17 @@ public class RaportRestController {
 	@RequestMapping(value = "/search", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<List<SearchBookDto>> search(@RequestParam("t") String term) {
+		long st = System.currentTimeMillis();
 		List<Book> books = bookService.searchByDescription(term);
+		long end = System.currentTimeMillis();
+		System.out.println("t: " + (end - st));
 		List<SearchBookDto> result = new ArrayList<>(books.size());
 
 		for (Book book : books) {
 			result.add( new SearchBookDto(book.getTitle(), book.getId(), book.getIsbn()) );
 		}
 
-		log.info("Book searched size: {}", books.size());
+//		log.info("Book searched size: {}", books.size());
 
 		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
@@ -61,7 +67,8 @@ public class RaportRestController {
 	public ResponseEntity<DetailsBookDto> details(@RequestParam("id") Long id) {
 		long st = System.currentTimeMillis();
 		Book book = bookService.getBookById(id);
-		System.out.println(System.currentTimeMillis() - st);
+		long end = System.currentTimeMillis();
+		System.out.println("t: " + (end - st));
 		DetailsBookDto dto;
 		if (book != null) {
 			dto = new DetailsBookDto(book.getTitle(), book.getAuthor(), book.getDesc() != null ? book.getDesc() : book.getDesc_s());

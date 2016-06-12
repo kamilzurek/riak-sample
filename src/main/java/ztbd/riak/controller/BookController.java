@@ -34,12 +34,15 @@ public class BookController {
 
 		group = bookService.groupBySubCategory();
 		model.addAttribute("subcategoriesAsJS", getAsJson(group));
+		model.addAttribute("subcategories", group);
 
 		group = bookService.groupByYear();
 		model.addAttribute("yearsAsJS", getAsJson(group));
+		model.addAttribute("dates", group);
 
 		group = bookService.groupByRate();
 		model.addAttribute("ratesAsJS", getAsJson(group));
+		model.addAttribute("rates", group);
 
 		LOG.info("Search: {}", bookService.searchByDescription("Microsoft"));
 
